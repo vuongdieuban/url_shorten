@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 
-module.exports = function() {
+module.exports = async function() {
   // Connect to Mongodb
-  mongoose
-    .connect("mongodb://localhost/url_shortener", {
+  try {
+    await mongoose.connect("mongodb://localhost/url_shortener", {
       useNewUrlParser: true,
       useUnifiedTopology: true
-    })
-    .then(() => console.log("Success! Connected to DB"))
-    .catch(() => console.log("Fail to connect to DB"));
+    });
+    console.log("Success! Connected to DB");
+  } catch (err) {
+    console.log("Fail to connect to DB\n", err.message);
+    process.exit(1);
+  }
 };
