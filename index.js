@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 
-// setup all the nesscessary startup here such as db connection, error loggin
+// setup all the nesscessary startup here such as db connection, routes,..
+require("./startup/db")();
 require("./startup/routes")(app);
 
 // Listen on Port
