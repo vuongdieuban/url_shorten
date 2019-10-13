@@ -1,0 +1,22 @@
+{
+  "name": "url_shorten",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuongdieuban/url_shorten.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vuongdieuban/url_shorten/issues"
+  },
+  "homepage": "https://github.com/vuongdieuban/url_shorten#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
