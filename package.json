@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/vuongdieuban/url_shorten#readme",
   "dependencies": {
+    "config": "^3.2.3",
     "express": "^4.17.1",
     "mongoose": "^5.7.4",
     "shortid": "^2.2.15",
