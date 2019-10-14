@@ -17,25 +17,20 @@ router.post("/", async (req, res) => {
     return res.status(400).json("Not a valid longUrl");
   }
 
-  try {
-    let url = await Url.findOne({ longUrl });
-    if (url) {
-      res.json(url);
-    } else {
-      const urlCode = shortid.generate();
-      const shortUrl = baseUrl + "/" + urlCode;
-      url = new Url({
-        longUrl,
-        shortUrl,
-        urlCode,
-        date: new Date()
-      });
-      await url.save();
-      res.json(url);
-    }
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).json("Something is wrong on the server");
+  let url = await Url.findOne({ longUrl });
+  if (url) {
+    res.json(url);
+  } else {
+    const urlCode = shortid.generate();
+    const shortUrl = baseUrl + "/" + urlCode;
+    url = new Url({
+      longUrl,
+      shortUrl,
+      urlCode,
+      date: new Date()
+    });
+    await url.save();
+    res.json(url);
   }
 });
 
