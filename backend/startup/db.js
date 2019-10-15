@@ -5,7 +5,8 @@ module.exports = async function() {
   try {
     await mongoose.connect("mongodb://localhost/url_shortener", {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useFindAndModify: false
     });
     console.log("Success! Connected to DB");
   } catch (err) {

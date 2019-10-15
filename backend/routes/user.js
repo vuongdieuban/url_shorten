@@ -1,27 +1,33 @@
-const { Url } = require("../models/url");
-const { User } = require("../models/user");
 const express = require("express");
 const router = express.Router();
+const { Url } = require("../models/url");
+const { User } = require("../models/user");
+const auth = require("../middleware/auth");
 
-// THere should be a auth middleware that check for google auth token , if it is valid then pass the user info to this route, else reject in the middleware
-
-router.get("/", async (req, res) => {
-  // Return this user info, including all the urls
-  // THe middleware pass the user object into this route. Extract and find the user based on email.
-  // If user not exist then return 400 (user not exist)
-  // Else return user object, which include all the urls in urlId array. Need to populate the urlId with url object before return
-  // Search for mongoose populate
-
-  res.send("Get User info");
+router.get("/", auth, async (req, res) => {
+  const { googleId } = req.user;
+  const user = await User.findOne({ googleId }).populate("urls");
+  // User not found only happen if database wipe the user. User should alredy exist if x-auth-token pass b/c x-auth-token is signed when user is signed in.
+  if (!user) return res.status(500).send("User not exist, try signin again");
+  res.json(user);
 });
 
-router.post("/", async (req, res) => {
-  // Post the new urlId into this user urlId array
-  // THe middleware pass the user object into this route. Extract and find the user based on email.
-  // If user not exist then return 400 (user not exist)
-  // If urlId not exist  return 400 (urlId not exist)
-  // Else, push the new urlId into the user urlId array then save and return.
-  res.send("post new url to user");
+router.post("/", auth, async (req, res) => {
+  const { googleId } = req.user;
+  const { urlId } = req.body; // urlId generated from posting a long url to /url
+
+  const url = await Url.findOne({ _id: urlId });
+  if (!url) return res.status(400).json("This url does not exist");
+
+  const user = await User.findOneAndUpdate(
+    { googleId },
+    { $addToSet: { urls: urlId } },
+    { new: true }
+  ).populate("urls");
+
+  // User not found only happen if database wipe the user. User should alredy exist if x-auth-token pass b/c x-auth-token is signed when user is signed in.
+  if (!user) return res.status(500).send("User not exist, try signin again");
+  res.json(user);
 });
 
 module.exports = router;
