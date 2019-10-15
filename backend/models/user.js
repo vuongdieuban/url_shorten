@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+  googleId: String,
+  name: String,
   email: String,
   urls: [{ type: mongoose.Schema.Types.ObjectId, ref: "Url" }]
 });
@@ -12,6 +14,7 @@ userSchema.methods.generateAuthToken = function() {
   const token = jwt.sign(
     {
       _id: this._id,
+      name: this.name,
       email: this.email,
       urls: this.urls,
       iat: new Date().getTime(), //current time (issue at)

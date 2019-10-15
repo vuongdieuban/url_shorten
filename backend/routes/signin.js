@@ -8,21 +8,13 @@ const router = express.Router();
 // get the user object from google, query database for this user email. If exist then return user, else make a new record for this user.
 
 router.post("/", async (req, res) => {
-  const ClientID = config.get("ClientID");
+  const ClientId = config.get("ClientId");
   const ClientSecret = config.get("ClientSecret");
 
-  const { accessToken, refreshToken } = req.body;
-  // Post the new urlId into this user urlId array
-  const oauth2Client = new OAuth2(
-    ClientID,
-    ClientSecret,
-    "http://localhost:5000"
-  );
+  const { accessToken } = req.body;
+  const oauth2Client = new OAuth2(ClientId, ClientSecret);
 
-  oauth2Client.setCredentials({
-    access_token: accessToken,
-    refresh_token: refreshToken
-  });
+  oauth2Client.setCredentials({ access_token: accessToken });
 
   const oauth2 = google.oauth2({
     auth: oauth2Client,
@@ -30,8 +22,9 @@ router.post("/", async (req, res) => {
   });
 
   try {
-    // const { data } = await oauth2.userinfo.get();
     const { data } = await oauth2.userinfo.get();
+    // CHeck if user exist based on googleId, if user not exist in database, create user. Return a signed JWT.
+    // If user already exist, load up existed user. Return a signed JWT.
     res.json(data);
   } catch (err) {
     res.status(400).send("Wrong token info. Token might expired");
