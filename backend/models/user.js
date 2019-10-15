@@ -14,9 +14,9 @@ userSchema.methods.generateAuthToken = function() {
   const token = jwt.sign(
     {
       _id: this._id,
+      googleId: this.googleId,
       name: this.name,
       email: this.email,
-      urls: this.urls,
       iat: new Date().getTime(), //current time (issue at)
       exp: new Date().setDate(new Date().getDate() + 1) //current time + 1 day ahead (expire date)
     },
