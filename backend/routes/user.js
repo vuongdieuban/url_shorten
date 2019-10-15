@@ -11,6 +11,7 @@ router.get("/", async (req, res) => {
   // If user not exist then return 400 (user not exist)
   // Else return user object, which include all the urls in urlId array. Need to populate the urlId with url object before return
   // Search for mongoose populate
+
   res.send("Get User info");
 });
 

@@ -1,0 +1,5 @@
+{
+  "jwtPrivateKey": "jwtPrivateKey",
+  "ClientID": "ClientID",
+  "ClientSecret": "ClientSecret"
+}
