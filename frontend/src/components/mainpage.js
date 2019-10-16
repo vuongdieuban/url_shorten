@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Input from "./input";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import auth from "../services/authService";
+import user from "../services/userService";
 
 class MainPage extends Component {
   state = {};
@@ -13,6 +14,8 @@ class MainPage extends Component {
       );
     console.log("Google Login Response:", res);
     await auth.signinUser(res.Zi.access_token);
+    const userInfo = await user.getUserInfo();
+    console.log(userInfo);
     // window.location = "/me";
   };
 

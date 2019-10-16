@@ -16,10 +16,7 @@ axios.interceptors.response.use(null, error => {
 
 // called in authService.js to set headers to http requests before any http request is made
 const setJwt = jwt => {
-  if (jwt) {
-    // set default header for every request
-    axios.defaults.headers.common["x-auth-token"] = jwt;
-  }
+  axios.defaults.headers.common["x-auth-token"] = jwt;
 };
 
 export default {
