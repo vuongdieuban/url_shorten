@@ -1,22 +1,23 @@
-import React from "react";
-import Input from "../src/components/input";
+import React, { Component } from "react";
+import { Route, Redirect, Switch } from "react-router-dom";
+import MainPage from "./components/mainpage";
+import Personal from "./components/personal";
 import "./App.css";
 
-function App() {
-  return (
-    <div
-      style={{
-        height: "100vh",
-        width: "80vw",
-        margin: "auto",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
-      <Input />
-    </div>
-  );
+class App extends Component {
+  state = {};
+  render() {
+    return (
+      <React.Fragment>
+        <div className="container">
+          <Switch>
+            <Route path="/me" component={Personal} />
+            <Route path="/" component={MainPage} />
+          </Switch>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
