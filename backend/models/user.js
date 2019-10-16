@@ -1,6 +1,7 @@
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const Joi = require("joi");
 
 const userSchema = new mongoose.Schema({
   googleId: String,
@@ -27,4 +28,15 @@ userSchema.methods.generateAuthToken = function() {
 
 const User = mongoose.model("User", userSchema);
 
+const validate = body => {
+  const schema = {
+    urls: Joi.array()
+      .items(Joi.string())
+      .required()
+  };
+  const result = Joi.validate(body, schema);
+  return result;
+};
+
 module.exports.User = User;
+module.exports.validate = validate;

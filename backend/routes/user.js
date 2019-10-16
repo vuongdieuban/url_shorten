@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Url } = require("../models/url");
-const { User } = require("../models/user");
+const { User, validate } = require("../models/user");
 const auth = require("../middleware/auth");
 
 router.get("/", auth, async (req, res) => {
@@ -14,14 +14,21 @@ router.get("/", auth, async (req, res) => {
 
 router.post("/", auth, async (req, res) => {
   const { googleId } = req.user;
-  const { urlId } = req.body; // urlId generated from posting a long url to /url
+  const { urls } = req.body; // urls contains url's _id generated from posting a long url to /url
 
-  const url = await Url.findOne({ _id: urlId });
-  if (!url) return res.status(400).json("This url does not exist");
+  const { error } = validate(req.body);
+  if (error) return res.status(400).json(error.details[0].message);
+
+  // Check to verify all the id in urls exists
+  try {
+    await Url.find({ _id: { $exists: true, $in: urls } });
+  } catch (err) {
+    return res.status(400).json(err.message);
+  }
 
   const user = await User.findOneAndUpdate(
     { googleId },
-    { $addToSet: { urls: urlId } },
+    { $addToSet: { urls } },
     { new: true }
   ).populate("urls");
 
