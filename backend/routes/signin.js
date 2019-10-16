@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
     res
       .header("x-auth-token", jwtToken)
       .header("access-control-expose-headers", "x-auth-token")
-      .json(user);
+      .json(jwtToken);
   } catch (err) {
     res.status(401).send("Wrong authentication credential");
     console.log(err);
