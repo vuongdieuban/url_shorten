@@ -37,4 +37,26 @@ router.post("/", auth, async (req, res) => {
   res.json(user);
 });
 
+router.delete("/", auth, async (req, res) => {
+  const { googleId } = req.user;
+  const deleteUrls = req.body.urls;
+
+  const { error } = validate(req.body);
+  if (error) return res.status(400).json(error.details[0].message);
+
+  try {
+    await Url.find({ _id: { $exists: true, $in: deleteUrls } });
+  } catch (err) {
+    return res.status(400).json(err.message);
+  }
+
+  const user = await User.findOneAndUpdate(
+    { googleId },
+    { $pull: { urls: { $in: deleteUrls } } },
+    { new: true }
+  ).populate("urls");
+
+  if (!user) return res.status(500).send("User not exist, try signin again");
+  res.json(user);
+});
 module.exports = router;
