@@ -44,7 +44,10 @@ class App extends Component {
         />
         <Switch>
           <Route path="/me" component={Personal} />
-          <Route path="/" component={MainPage} />
+          <Route
+            path="/"
+            render={props => <MainPage {...props} user={currentUser} />}
+          />
         </Switch>
       </React.Fragment>
     );

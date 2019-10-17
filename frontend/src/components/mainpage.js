@@ -23,6 +23,8 @@ class MainPage extends Component {
 
   render() {
     const { longUrl, shortUrl } = this.state;
+    const { user } = this.props;
+    console.log("user from main page", user);
     return (
       <React.Fragment>
         <Input

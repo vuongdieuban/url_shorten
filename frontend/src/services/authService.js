@@ -25,7 +25,6 @@ const getCurrentUser = () => {
   http.setJwt(jwt);
   if (jwt) {
     const user = jwtDecode(jwt);
-    console.log("Current user", user);
     return user;
   }
   return null;
