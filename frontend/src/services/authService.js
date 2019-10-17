@@ -1,7 +1,7 @@
 import http from "./httpService";
 import jwtDecode from "jwt-decode";
 
-const SIGNIN_URL = "http://localhost:5000/api/signin";
+const SIGNIN_URL = process.env.REACT_APP_BACKEND_DOMAIN + "/api/signin";
 const tokenKey = "jwt";
 
 const signinUser = async accessToken => {
