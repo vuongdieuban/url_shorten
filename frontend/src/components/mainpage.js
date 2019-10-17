@@ -14,13 +14,18 @@ class MainPage extends Component {
   handleShortenClicked = async e => {
     e.preventDefault();
     const { longUrl } = this.state;
-    const data = await url.shortenUrl(longUrl);
-    this.setState({ shortUrl: data.shortUrl, urlObj: data });
+    try {
+      const data = await url.shortenUrl(longUrl);
+      this.setState({ shortUrl: data.shortUrl, urlObj: data, error: null });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        this.setState({ error: ex.response.data });
+      }
+    }
   };
 
   handleValueChanged = e => {
     const longUrl = e.target.value;
-    console.log(longUrl);
     this.setState({ longUrl });
   };
 
@@ -32,25 +37,28 @@ class MainPage extends Component {
   };
 
   render() {
-    const { longUrl, shortUrl } = this.state;
+    const { longUrl, shortUrl, error } = this.state;
     const { user } = this.props;
     return (
       <React.Fragment>
-        <Input
-          onValueChange={this.handleValueChanged}
-          value={longUrl}
-          shortUrl={shortUrl}
-          onButtonClick={this.handleShortenClicked}
-        />
-        {user && (
-          <button
-            className="btn btn-primary"
-            onClick={this.handleSaveClicked}
-            disabled={shortUrl ? false : true}
-          >
-            Save
-          </button>
-        )}
+        <div className="container">
+          <Input
+            onValueChange={this.handleValueChanged}
+            value={longUrl}
+            shortUrl={shortUrl}
+            onButtonClick={this.handleShortenClicked}
+            error={error}
+          />
+          {user && (
+            <button
+              className="btn btn-primary"
+              onClick={this.handleSaveClicked}
+              disabled={shortUrl ? false : true}
+            >
+              Save
+            </button>
+          )}
+        </div>
       </React.Fragment>
     );
   }
