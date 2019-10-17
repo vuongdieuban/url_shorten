@@ -7,4 +7,14 @@ const getUserInfo = async () => {
   return data;
 };
 
-export default { getUserInfo };
+const postUrls = async urls => {
+  const { data } = await http.post(USER_URL, { urls });
+  return data;
+};
+
+const deleteUrls = async urls => {
+  const { data } = await http.delete(USER_URL, { urls });
+  return data;
+};
+
+export default { getUserInfo, postUrls, deleteUrls };

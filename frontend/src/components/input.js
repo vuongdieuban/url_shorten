@@ -4,7 +4,7 @@ const Input = props => {
   const { onValueChange, value, onButtonClick, shortUrl } = props;
   return (
     <form onSubmit={onButtonClick}>
-      <div className="search_form">
+      <div className="row">
         <div className="col-md-10">
           <div className="input-group mb-3 ">
             <div className="input-group-prepend">
