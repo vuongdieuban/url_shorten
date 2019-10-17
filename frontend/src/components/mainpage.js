@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Input from "./input";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import auth from "../services/authService";
 import user from "../services/userService";
+import Input from "./input";
+import NavBar from "./navbar";
 
 class MainPage extends Component {
   state = {
@@ -37,7 +38,8 @@ class MainPage extends Component {
     const { currentUser } = this.state;
     return (
       <React.Fragment>
-        <div className="align-items-center">
+        <NavBar />
+        <div className="align-items-center search_form">
           <Input />
           <div>
             {currentUser ? (
