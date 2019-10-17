@@ -10,9 +10,7 @@ class App extends Component {
   state = { currentUser: null };
 
   handleSigninSuccess = async res => {
-    console.log("Google Login Response:", res);
     const currentUser = await auth.signinUser(res.Zi.access_token);
-    console.log(currentUser);
     this.setState({ currentUser });
   };
 
@@ -25,7 +23,6 @@ class App extends Component {
   };
 
   handleSignout = () => {
-    console.log("Google Logout");
     auth.signoutUser();
     this.setState({ currentUser: null });
   };
