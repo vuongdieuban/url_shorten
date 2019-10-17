@@ -1,42 +1,48 @@
 import React from "react";
+import { Navbar, Nav } from "react-bootstrap";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 const NavBar = props => {
+  const { onSigninSuccess, onSigninFail, onSignout, user } = props;
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
-        Navbar
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul className="navbar-nav">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Main <span className="sr-only">(current)</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              My Urls
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Sign In
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <Navbar bg="light" variant="light">
+      <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+      <Nav className="mr-auto">
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/me">My Profile</Nav.Link>
+        {user ? (
+          <GoogleLogout
+            render={renderProps => (
+              <Nav.Link
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                Sign Out
+              </Nav.Link>
+            )}
+            buttonText="Sign Out"
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            onLogoutSuccess={onSignout}
+          />
+        ) : (
+          <GoogleLogin
+            render={renderProps => (
+              <Nav.Link
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                Sign In
+              </Nav.Link>
+            )}
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            buttonText="Sign In"
+            onSuccess={onSigninSuccess}
+            onFailure={onSigninFail}
+            cookiePolicy="single_host_origin"
+          />
+        )}
+      </Nav>
+    </Navbar>
   );
 };
 
