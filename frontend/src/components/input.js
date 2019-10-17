@@ -1,24 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Input extends Component {
-  state = {};
-  render() {
-    return (
-      <div className="input-group mb-3">
-        <div className="input-group-prepend">
-          <span className="input-group-text" id="inputGroup-sizing-default">
-            Default
-          </span>
+const Input = props => {
+  const { onValueChange, value, onButtonClick, shortUrl } = props;
+  return (
+    <form onSubmit={onButtonClick}>
+      <div className="search_form">
+        <div className="col-md-10">
+          <div className="input-group mb-3 ">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-default">
+                URL
+              </span>
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              onChange={onValueChange}
+              value={value}
+            />
+          </div>
+          <div className="short_url">
+            Short Url Link: <a href={shortUrl}>{shortUrl}</a>
+          </div>
         </div>
-        <input
-          type="text"
-          className="form-control"
-          aria-label="Default"
-          aria-describedby="inputGroup-sizing-default"
-        />
+        <div className="col-md-2">
+          <button className="btn btn-primary" onClick={onButtonClick}>
+            Shorten
+          </button>
+        </div>
       </div>
-    );
-  }
-}
+    </form>
+  );
+};
 
 export default Input;

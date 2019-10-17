@@ -1,14 +1,39 @@
-import React from "react";
+import React, { Component } from "react";
 import Input from "./input";
+import url from "../services/urlService";
 
-const MainPage = () => {
-  return (
-    <React.Fragment>
-      <div className="align-items-center search_form">
-        <Input />
-      </div>
-    </React.Fragment>
-  );
-};
+class MainPage extends Component {
+  state = {
+    longUrl: "",
+    shortUrl: ""
+  };
+
+  handleShortenClicked = async e => {
+    e.preventDefault();
+    const { longUrl } = this.state;
+    const data = await url.shortenUrl(longUrl);
+    this.setState({ shortUrl: data.shortUrl });
+  };
+
+  handleValueChanged = e => {
+    const longUrl = e.target.value;
+    console.log(longUrl);
+    this.setState({ longUrl });
+  };
+
+  render() {
+    const { longUrl, shortUrl } = this.state;
+    return (
+      <React.Fragment>
+        <Input
+          onValueChange={this.handleValueChanged}
+          value={longUrl}
+          shortUrl={shortUrl}
+          onButtonClick={this.handleShortenClicked}
+        />
+      </React.Fragment>
+    );
+  }
+}
 
 export default MainPage;
