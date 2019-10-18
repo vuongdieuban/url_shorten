@@ -12,7 +12,6 @@ const signinUser = async accessToken => {
   localStorage.setItem(tokenKey, data);
   // set token into header
   http.setJwt(data);
-  console.log(data);
   return user;
 };
 

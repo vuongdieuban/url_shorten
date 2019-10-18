@@ -24,7 +24,7 @@ class App extends Component {
 
   handleSignout = () => {
     auth.signoutUser();
-    this.setState({ currentUser: null });
+    window.location = "/";
   };
 
   componentDidMount() {

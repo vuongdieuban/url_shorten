@@ -45,11 +45,9 @@ class MainPage extends Component {
   }
 
   componentWillUnmount() {
-    console.log("unmount");
     let state = { ...this.state };
     state = JSON.stringify(state);
     localStorage.setItem("mainpage", state);
-    console.log(localStorage.getItem("mainpage"));
   }
 
   render() {
