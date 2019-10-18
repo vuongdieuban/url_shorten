@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import MainPage from "./components/mainpage";
 import Personal from "./components/personal";
 import NavBar from "./components/navbar";
+import ProtectedRoute from "./components/protectedRoute";
 import auth from "./services/authService";
 import "./App.css";
 
@@ -43,10 +44,7 @@ class App extends Component {
           onSignout={this.handleSignout}
         />
         <Switch>
-          <Route
-            path="/me"
-            render={props => <Personal {...props} user={currentUser} />}
-          />
+          <ProtectedRoute path="/me" component={Personal} />
           <Route
             path="/"
             render={props => <MainPage {...props} user={currentUser} />}
