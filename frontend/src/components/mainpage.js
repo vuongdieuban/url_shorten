@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Input from "./input";
-import url from "../services/urlService";
-import user from "../services/userService";
+import urlService from "../services/urlService";
+import userService from "../services/userService";
 
 class MainPage extends Component {
   state = {
@@ -15,7 +15,7 @@ class MainPage extends Component {
     e.preventDefault();
     const { longUrl } = this.state;
     try {
-      const data = await url.shortenUrl(longUrl);
+      const data = await urlService.shortenUrl(longUrl);
       this.setState({ shortUrl: data.shortUrl, urlObj: data, error: null });
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -33,7 +33,7 @@ class MainPage extends Component {
     const { urlObj } = this.state;
     const urls = [];
     urls.push(urlObj._id);
-    const data = await user.postUrls(urls);
+    const data = await userService.postUrls(urls);
   };
 
   componentDidMount() {
