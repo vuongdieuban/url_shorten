@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
@@ -6,9 +7,13 @@ const NavBar = props => {
   const { onSigninSuccess, onSigninFail, onSignout, user } = props;
   return (
     <Navbar bg="light" variant="light">
-      <Navbar.Brand href="/">Short URL</Navbar.Brand>
+      <Navbar.Brand as={Link} to="/">
+        Short URL
+      </Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link as={Link} to="/">
+          Home
+        </Nav.Link>
         {user ? (
           <GoogleLogout
             render={renderProps => (
@@ -40,7 +45,11 @@ const NavBar = props => {
             cookiePolicy="single_host_origin"
           />
         )}
-        {user && <Nav.Link href="/me">{user.name}</Nav.Link>}
+        {user && (
+          <Nav.Link as={Link} to="/me">
+            {user.name}
+          </Nav.Link>
+        )}
       </Nav>
     </Navbar>
   );

@@ -36,6 +36,22 @@ class MainPage extends Component {
     const data = await user.postUrls(urls);
   };
 
+  componentDidMount() {
+    let state = localStorage.getItem("mainpage");
+    if (state) {
+      state = JSON.parse(state);
+      this.setState(state);
+    }
+  }
+
+  componentWillUnmount() {
+    console.log("unmount");
+    let state = { ...this.state };
+    state = JSON.stringify(state);
+    localStorage.setItem("mainpage", state);
+    console.log(localStorage.getItem("mainpage"));
+  }
+
   render() {
     const { longUrl, shortUrl, error } = this.state;
     const { user } = this.props;
