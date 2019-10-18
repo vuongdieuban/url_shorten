@@ -43,7 +43,10 @@ class App extends Component {
           onSignout={this.handleSignout}
         />
         <Switch>
-          <Route path="/me" component={Personal} />
+          <Route
+            path="/me"
+            render={props => <Personal {...props} user={currentUser} />}
+          />
           <Route
             path="/"
             render={props => <MainPage {...props} user={currentUser} />}
