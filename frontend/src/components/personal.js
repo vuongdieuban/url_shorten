@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import UrlTable from "./table";
+
 class Personal extends Component {
   state = {};
   componentDidMount() {
@@ -11,7 +13,9 @@ class Personal extends Component {
   render() {
     return (
       <React.Fragment>
-        <div>This is a restricted personal page. </div>
+        <div className="container">
+          <UrlTable />
+        </div>
       </React.Fragment>
     );
   }
