@@ -13,7 +13,7 @@ const postUrls = async urls => {
 };
 
 const deleteUrls = async urls => {
-  const { data } = await http.delete(USER_URL, { urls });
+  const { data } = await http.delete(USER_URL, { data: { urls } });
   return data;
 };
 
