@@ -1,3 +1,8 @@
+ul {
+  padding: 0;
+  margin: 0;
+}
+
 .hover {
   cursor: pointer;
 }
@@ -5,4 +10,103 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.holder {
+  transition: all 200ms ease-in-out;
+}
+
+.noImage {
+  opacity: 0;
+}
+
+.holder.noImage {
+  transition: all 200ms ease-in-out;
+}
+
+.banner {
+  width: 100%;
+  height: 400px;
+  max-height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffd139;
+}
+
+.banner .title {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.shorten-app {
+  background: #0b1736;
+}
+
+.form {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.form .input {
+  width: 100%;
+  height: 4rem;
+  font-size: 2rem;
+  border-radius: 8px;
+}
+
+.form .button {
+  width: 100%;
+  height: 4rem;
+}
+
+.shorten-action {
+  border-radius: 8px 8px 8px 8px;
+}
+
+.shorten-action .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border-radius: 8px 8px 8px 8px;
+}
+
+.shorten-action li {
+  padding: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid grey;
+}
+
+.confirm {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.confirm button {
+  width: 100%;
+  height: 4rem;
+  background: transparent;
+  border: 4px solid #ffd139;
+  color: #ffd139;
+  font-size: 2rem;
+  transition: 0.2s ease-in-out;
+  outline: none;
+  border-radius: 8px;
+}
+
+.confirm button:hover {
+  background: #ffd139;
+  color: midnightblue;
+}
+
+button:active,
+button:focus {
+  outline: none !important;
 }

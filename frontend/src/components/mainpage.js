@@ -90,28 +90,37 @@ class MainPage extends Component {
     const { user } = this.props;
     return (
       <React.Fragment>
-        <div className="container">
-          <Input
-            onValueChange={this.handleValueChanged}
-            value={longUrl}
-            onButtonClick={this.handleShortenClicked}
-            error={error}
-          />
-          <ShortenUrl
-            urls={urls}
-            onHearClick={this.handleHeartClicked}
-            user={user}
-          />
-          {user && (
-            <button
-              className="btn btn-outline-primary btn-block"
-              onClick={this.handleSaveClicked}
-              disabled={saveUrls.length ? false : true}
-            >
-              Save
-            </button>
-          )}
+        <div className="banner">
+          <h1 className="title">SHORTEN URL</h1>
         </div>
+        <section className="shorten-app">
+          <div className="container">
+            <Input
+              onValueChange={this.handleValueChanged}
+              value={longUrl}
+              onButtonClick={this.handleShortenClicked}
+              error={error}
+            />
+            <ShortenUrl
+              urls={urls}
+              onHearClick={this.handleHeartClicked}
+              user={user}
+            />
+
+            {user && (
+              <div className="confirm">
+                <button
+                  className="button"
+                  onClick={this.handleSaveClicked}
+                  disabled={saveUrls.length ? false : true}
+                  style={{ padding: 0 }}
+                >
+                  Save
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
       </React.Fragment>
     );
   }
