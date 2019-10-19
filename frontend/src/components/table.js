@@ -40,7 +40,7 @@ const UrlTable = props => {
   const headers = ["#", "Long Url", "Short Url", "Date", "Action"];
   const { urls, onDelete, onCancel } = props;
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hover responsive>
       <thead>
         <tr>
           {headers.map((header, index) => (
