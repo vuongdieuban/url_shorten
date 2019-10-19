@@ -23,10 +23,8 @@ class Personal extends Component {
 
   handleSaveClicked = async () => {
     const { deleteUrls } = this.state;
-    console.log("save clicked", { deleteUrls });
     const userInfo = await userService.deleteUrls(deleteUrls);
-    toast.success("Saved");
-    this.setState({ urls: userInfo.urls });
+    this.setState({ urls: userInfo.urls }, () => toast.success("Saved"));
   };
 
   async componentDidMount() {

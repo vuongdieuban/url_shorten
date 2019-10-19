@@ -10,7 +10,7 @@ const UrlTable = props => {
   };
 
   const reduceDate = date => {
-    const shortDate = date.match(/^(.*?)\GMT/);
+    const shortDate = date.match(/^(.*?)GMT/);
     return shortDate[1];
   };
 

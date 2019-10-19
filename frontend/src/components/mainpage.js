@@ -30,7 +30,7 @@ class MainPage extends Component {
       const data = await urlService.shortenUrl(longUrl);
       const urlViewModel = this.mapToViewModel(data);
       urls.push(urlViewModel);
-      this.setState({ urls, error: null });
+      this.setState({ urls, longUrl: "", error: null });
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({ error: ex.response.data });
@@ -44,22 +44,31 @@ class MainPage extends Component {
   };
 
   handleHeartClicked = index => {
-    let { saveUrls } = this.state;
+    let saveUrls = [...this.state.saveUrls];
     let urls = JSON.parse(JSON.stringify(this.state.urls));
     let url = urls[index];
-    url.save = !url.save;
     if (url.save) {
+      url.save = false;
+      saveUrls = saveUrls.filter(id => id !== url.id);
+    } else {
+      url.save = true;
       saveUrls.push(url.id);
-    } else if (!url.save && saveUrls.includes(url.id)) {
-      saveUrls = saveUrls.filter(u => u.id !== url.id);
     }
     this.setState({ urls, saveUrls });
   };
 
   handleSaveClicked = async e => {
     const { saveUrls } = this.state;
-    const data = await userService.postUrls(saveUrls);
-    toast.success("Saved");
+    try {
+      const data = await userService.postUrls(saveUrls);
+      let urls = JSON.parse(JSON.stringify(this.state.urls));
+      urls = urls.filter(u => u.save === false);
+      this.setState({ urls, saveUrls: [] }, () => toast.success("Saved"));
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        this.setState({ error: ex.response.data });
+      }
+    }
   };
 
   componentDidMount() {
