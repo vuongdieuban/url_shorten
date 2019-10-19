@@ -5,6 +5,9 @@ import userService from "../services/userService";
 import ShortenUrl from "../components/shortenUrl";
 import { toast } from "react-toastify";
 
+const STATE_KEY = "mainpage"; // key to store this.state to local storage
+window.onbeforeunload = () => localStorage.removeItem(STATE_KEY);
+
 class MainPage extends Component {
   state = {
     longUrl: "",
@@ -59,6 +62,7 @@ class MainPage extends Component {
 
   handleSaveClicked = async e => {
     const { saveUrls } = this.state;
+    if (!saveUrls.length) return toast.info("Heart the URL to Save");
     try {
       const data = await userService.postUrls(saveUrls);
       let urls = JSON.parse(JSON.stringify(this.state.urls));
@@ -72,7 +76,7 @@ class MainPage extends Component {
   };
 
   componentDidMount() {
-    let state = localStorage.getItem("mainpage");
+    let state = localStorage.getItem(STATE_KEY);
     if (state) {
       state = JSON.parse(state);
       this.setState(state);
@@ -82,7 +86,7 @@ class MainPage extends Component {
   componentWillUnmount() {
     let state = { ...this.state };
     state = JSON.stringify(state);
-    localStorage.setItem("mainpage", state);
+    localStorage.setItem(STATE_KEY, state);
   }
 
   render() {
@@ -109,12 +113,7 @@ class MainPage extends Component {
 
             {user && (
               <div className="confirm">
-                <button
-                  className="button"
-                  onClick={this.handleSaveClicked}
-                  disabled={saveUrls.length ? false : true}
-                  style={{ padding: 0 }}
-                >
+                <button className="button" onClick={this.handleSaveClicked}>
                   Save
                 </button>
               </div>
