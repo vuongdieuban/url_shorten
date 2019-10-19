@@ -6,13 +6,13 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 const NavBar = props => {
   const { onSigninSuccess, onSigninFail, onSignout, user } = props;
   return (
-    <Navbar bg="light" variant="light" expand="lg">
+    <Navbar bg="light" variant="light" expand="lg" fixed="top">
       <Navbar.Brand as={Link} to="/">
         Short URL
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav className="mr-auto justify-content-end" style={{ width: "100%" }}>
           <Nav.Link as={Link} to="/">
             Home
           </Nav.Link>

@@ -37,19 +37,21 @@ class Personal extends Component {
     return (
       <React.Fragment>
         <div className="container">
-          <UrlTable
-            urls={urls}
-            deleteUrls={deleteUrls}
-            onDelete={this.handleDelete}
-            onCancel={this.handleCancel}
-          />
-          <button
-            className="btn btn-primary"
-            onClick={this.handleSaveClicked}
-            disabled={deleteUrls.length ? false : true}
-          >
-            Save
-          </button>
+          <div className="table" style={{ marginTop: "100px" }}>
+            <UrlTable
+              urls={urls}
+              deleteUrls={deleteUrls}
+              onDelete={this.handleDelete}
+              onCancel={this.handleCancel}
+            />
+            <button
+              className="btn btn-primary"
+              onClick={this.handleSaveClicked}
+              disabled={deleteUrls.length ? false : true}
+            >
+              Save
+            </button>
+          </div>
         </div>
       </React.Fragment>
     );
