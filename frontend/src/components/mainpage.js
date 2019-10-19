@@ -43,6 +43,19 @@ class MainPage extends Component {
     this.setState({ longUrl });
   };
 
+  handleHeartClicked = index => {
+    let { saveUrls } = this.state;
+    let urls = JSON.parse(JSON.stringify(this.state.urls));
+    let url = urls[index];
+    url.save = !url.save;
+    if (url.save) {
+      saveUrls.push(url.id);
+    } else if (!url.save && saveUrls.includes(url.id)) {
+      saveUrls = saveUrls.filter(u => u.id !== url.id);
+    }
+    this.setState({ urls, saveUrls });
+  };
+
   handleSaveClicked = async e => {
     const { saveUrls } = this.state;
     const data = await userService.postUrls(saveUrls);
@@ -75,7 +88,11 @@ class MainPage extends Component {
             onButtonClick={this.handleShortenClicked}
             error={error}
           />
-          <ShortenUrl urls={urls} />
+          <ShortenUrl
+            urls={urls}
+            onHearClick={this.handleHeartClicked}
+            user={user}
+          />
           {user && (
             <button
               className="btn btn-outline-primary btn-block"
