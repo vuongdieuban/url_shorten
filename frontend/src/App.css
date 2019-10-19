@@ -1,3 +1,6 @@
+.hover {
+  cursor: pointer;
+}
 .long-link {
   white-space: nowrap;
   overflow: hidden;

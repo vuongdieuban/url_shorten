@@ -49,20 +49,21 @@ const UrlTable = props => {
         </tr>
       </thead>
       <tbody>
-        {urls.length &&
-          urls.map((url, index) => (
-            <tr key={url._id}>
-              <td>{index}</td>
-              <td>
-                <a href={url.longUrl}>{reduceLongUrl(url.longUrl)}</a>
-              </td>
-              <td>
-                <a href={url.shortUrl}>{url.shortUrl}</a>
-              </td>
-              <td>{reduceDate(url.date)}</td>
-              <td>{getActionButton(url._id)}</td>
-            </tr>
-          ))}
+        {urls.length
+          ? urls.map((url, index) => (
+              <tr key={url._id}>
+                <td>{index}</td>
+                <td>
+                  <a href={url.longUrl}>{reduceLongUrl(url.longUrl)}</a>
+                </td>
+                <td>
+                  <a href={url.shortUrl}>{url.shortUrl}</a>
+                </td>
+                <td>{reduceDate(url.date)}</td>
+                <td>{getActionButton(url._id)}</td>
+              </tr>
+            ))
+          : null}
       </tbody>
     </Table>
   );

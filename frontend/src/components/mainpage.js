@@ -8,17 +8,29 @@ import { toast } from "react-toastify";
 class MainPage extends Component {
   state = {
     longUrl: "",
-    shortUrl: "",
-    urlObj: null,
+    urls: [],
+    saveUrls: [],
     error: null
+  };
+
+  mapToViewModel = url => {
+    return {
+      id: url._id,
+      longUrl: url.longUrl,
+      shortUrl: url.shortUrl,
+      save: false
+    };
   };
 
   handleShortenClicked = async e => {
     e.preventDefault();
     const { longUrl } = this.state;
+    let urls = JSON.parse(JSON.stringify(this.state.urls)); // deep copy
     try {
       const data = await urlService.shortenUrl(longUrl);
-      this.setState({ shortUrl: data.shortUrl, urlObj: data, error: null });
+      const urlViewModel = this.mapToViewModel(data);
+      urls.push(urlViewModel);
+      this.setState({ urls, error: null });
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({ error: ex.response.data });
@@ -32,10 +44,8 @@ class MainPage extends Component {
   };
 
   handleSaveClicked = async e => {
-    const { urlObj } = this.state;
-    const urls = [];
-    urls.push(urlObj._id);
-    const data = await userService.postUrls(urls);
+    const { saveUrls } = this.state;
+    const data = await userService.postUrls(saveUrls);
     toast.success("Saved");
   };
 
@@ -54,7 +64,7 @@ class MainPage extends Component {
   }
 
   render() {
-    const { longUrl, shortUrl, error } = this.state;
+    const { longUrl, urls, saveUrls, error } = this.state;
     const { user } = this.props;
     return (
       <React.Fragment>
@@ -62,16 +72,15 @@ class MainPage extends Component {
           <Input
             onValueChange={this.handleValueChanged}
             value={longUrl}
-            shortUrl={shortUrl}
             onButtonClick={this.handleShortenClicked}
             error={error}
           />
-          <ShortenUrl />
+          <ShortenUrl urls={urls} />
           {user && (
             <button
               className="btn btn-outline-primary btn-block"
               onClick={this.handleSaveClicked}
-              disabled={shortUrl ? false : true}
+              disabled={saveUrls.length ? false : true}
             >
               Save
             </button>

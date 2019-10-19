@@ -1,23 +1,25 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 
-const ShortenUrl = () => {
+const ShortenUrl = props => {
+  const { urls } = props;
   return (
     <ListGroup>
-      <ListGroup.Item>
-        <div className="row">
-          <div className="col-md-8 long-link">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed
-            repellendus voluptatum aliquid sunt blanditiis, qui possimus,
-            asperiores consequuntur reiciendis odit officiis quaerat suscipit
-            quos reprehenderit? Nihil nostrum quasi ratione deserunt.
-          </div>
-          <div className="col-md-2">Short Link</div>
-          <div className="col-md-2">
-            <i class="fa fa-heart-o" aria-hidden="true"></i>
-          </div>
-        </div>
-      </ListGroup.Item>
+      {urls.length
+        ? urls.map(url => (
+            <ListGroup.Item key={url.id}>
+              <div className="row">
+                <div className="col-md-7 long-link">{url.longUrl}</div>
+                <div className="col-md-3">
+                  <a href={url.shortUrl}>{url.shortUrl}</a>
+                </div>
+                <div className="col-md-2">
+                  <i class="fa fa-heart-o hover" aria-hidden="true" />
+                </div>
+              </div>
+            </ListGroup.Item>
+          ))
+        : null}
     </ListGroup>
   );
 };

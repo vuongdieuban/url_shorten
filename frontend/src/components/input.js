@@ -2,7 +2,7 @@ import React from "react";
 import { ListGroup } from "react-bootstrap";
 
 const Input = props => {
-  const { onValueChange, value, onButtonClick, shortUrl, error } = props;
+  const { onValueChange, value, onButtonClick, error } = props;
   return (
     <ListGroup variant="flush">
       <ListGroup.Item>
