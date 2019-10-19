@@ -6,11 +6,6 @@ ul {
 .hover {
   cursor: pointer;
 }
-.long-link {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .holder {
   transition: all 200ms ease-in-out;
@@ -88,7 +83,16 @@ ul {
   color: black;
   display: flex;
   flex-direction: row;
+}
+
+.shorten-action .item {
   border-bottom: 1px solid grey;
+}
+
+.long-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .confirm {

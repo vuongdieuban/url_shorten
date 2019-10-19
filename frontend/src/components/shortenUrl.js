@@ -14,17 +14,23 @@ const ShortenUrl = props => {
       <ul className="item-list">
         {urls.length
           ? urls.map((url, index) => (
-              <li className="item">
-                <div className="long-link">{url.longUrl}</div>
-                <a href={url.shortUrl}>{url.shortUrl}</a>
-                {user ? (
-                  <i
-                    className={getHeartClass(url)}
-                    aria-hidden="true"
-                    onClick={() => onHearClick(index)}
-                  />
-                ) : null}
-              </li>
+              <div className="item">
+                <li className="row">
+                  <div className="long-link col-md-7">{url.longUrl}</div>
+                  <div className="col-md-3">
+                    <a href={url.shortUrl}>{url.shortUrl}</a>
+                  </div>
+                  {user ? (
+                    <div className="col-md-2">
+                      <i
+                        className={getHeartClass(url)}
+                        aria-hidden="true"
+                        onClick={() => onHearClick(index)}
+                      />
+                    </div>
+                  ) : null}
+                </li>
+              </div>
             ))
           : null}
       </ul>
