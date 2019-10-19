@@ -37,6 +37,11 @@ const NavBar = props => {
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
                 >
+                  <i
+                    class="fa fa-google"
+                    aria-hidden="true"
+                    style={{ marginRight: "3px" }}
+                  ></i>
                   Sign In
                 </Nav.Link>
               )}
