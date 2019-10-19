@@ -1,4 +1,4 @@
 {
   "baseUrl": "http://localhost:5000",
-  "jwtPrivateKey": "1234"
+  "JwtPrivateKey": "1234"
 }

@@ -21,7 +21,7 @@ userSchema.methods.generateAuthToken = function() {
       iat: new Date().getTime(), //current time (issue at)
       exp: new Date().setDate(new Date().getDate() + 1) //current time + 1 day ahead (expire date)
     },
-    config.get("jwtPrivateKey")
+    config.get("JwtPrivateKey")
   );
   return token;
 };
