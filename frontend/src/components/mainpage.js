@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Input from "./input";
 import urlService from "../services/urlService";
 import userService from "../services/userService";
+import ShortenUrl from "../components/shortenUrl";
+import { toast } from "react-toastify";
 
 class MainPage extends Component {
   state = {
@@ -34,6 +36,7 @@ class MainPage extends Component {
     const urls = [];
     urls.push(urlObj._id);
     const data = await userService.postUrls(urls);
+    toast.success("Saved");
   };
 
   componentDidMount() {
@@ -63,9 +66,10 @@ class MainPage extends Component {
             onButtonClick={this.handleShortenClicked}
             error={error}
           />
+          <ShortenUrl />
           {user && (
             <button
-              className="btn btn-primary"
+              className="btn btn-outline-primary btn-block"
               onClick={this.handleSaveClicked}
               disabled={shortUrl ? false : true}
             >

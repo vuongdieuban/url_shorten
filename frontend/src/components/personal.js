@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UrlTable from "./table";
 import userService from "../services/userService";
+import { toast } from "react-toastify";
 
 class Personal extends Component {
   state = {
@@ -24,6 +25,7 @@ class Personal extends Component {
     const { deleteUrls } = this.state;
     console.log("save clicked", { deleteUrls });
     const userInfo = await userService.deleteUrls(deleteUrls);
+    toast.success("Saved");
     this.setState({ urls: userInfo.urls });
   };
 

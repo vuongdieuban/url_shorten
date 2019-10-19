@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { toast } from "react-toastify";
 import MainPage from "./components/mainpage";
 import Personal from "./components/personal";
 import NavBar from "./components/navbar";
 import ProtectedRoute from "./components/protectedRoute";
 import auth from "./services/authService";
 import "./App.css";
+
+toast.configure({ autoClose: 1500 });
 
 class App extends Component {
   state = { currentUser: null };
