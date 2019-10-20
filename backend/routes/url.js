@@ -9,9 +9,9 @@ router.post("/", async (req, res) => {
   const { longUrl } = req.body;
   const baseUrl = config.get("baseUrl");
 
-  if (!validUrl.isUri(baseUrl)) {
-    return res.status(400).json("Not a valid baseUrl");
-  }
+  // if (!validUrl.isUri(baseUrl)) {
+  //   return res.status(400).json("Not a valid baseUrl");
+  // }
 
   if (!validUrl.isUri(longUrl)) {
     return res.status(400).json("Not a valid longUrl");
