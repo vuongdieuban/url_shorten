@@ -16,12 +16,14 @@ const ShortenUrl = props => {
           ? urls.map((url, index) => (
               <div className="item">
                 <li className="row">
-                  <div className="long-link col-md-7">{url.longUrl}</div>
-                  <div className="col-md-3">
+                  <div className="long-link col-md-5" style={{ padding: 0 }}>
+                    {url.longUrl}
+                  </div>
+                  <div className="long-link col-md-5" style={{ padding: 0 }}>
                     <a href={url.shortUrl}>{url.shortUrl}</a>
                   </div>
                   {user ? (
-                    <div className="col-md-2">
+                    <div className="col-md-1" style={{ padding: 0 }}>
                       <i
                         className={getHeartClass(url)}
                         aria-hidden="true"
