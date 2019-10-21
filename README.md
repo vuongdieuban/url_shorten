@@ -16,9 +16,9 @@ This project emulates service like Bit.ly where user can post a long url and get
 ### Frontend:
 **Technologies Used**: Javascript/ReactJs, HTML5, CSS3, Bootstrap 4
 
-1) Interact with REST API backend to shorten url.
-2)  Interact with Google API for OAuth2 access token.
-3)  Follow ReactJs components based approach for ease of code re-use
+1) Interact with REST API backend to shorten url and save/display user data.
+2) Interact with Google API for OAuth2 access token.
+3) Follow ReactJs components based approach for ease of code re-use
 
 ### Quick overview of OAuth2 workflow:
 
