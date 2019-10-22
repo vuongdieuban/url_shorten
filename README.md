@@ -4,6 +4,8 @@
 
 This project emulates service like Bit.ly where user can post a long url and get a short url back, which can redirect to the long url address. User can sign in with their Google Account (OAuth2) and save the shortened urls for re-use.
 
+Live demo at: http://urls.banvuong.com/
+
 ## Details:
 
 ### Backend:
