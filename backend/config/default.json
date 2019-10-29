@@ -1,4 +1,5 @@
 {
   "baseUrl": "http://localhost:5000",
-  "JwtPrivateKey": "1234"
+  "JwtPrivateKey": "1234",
+  "Port": 5000
 }
